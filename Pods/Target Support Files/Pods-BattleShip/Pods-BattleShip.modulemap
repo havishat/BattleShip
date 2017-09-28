@@ -1,0 +1,6 @@
+framework module Pods_BattleShip {
+  umbrella header "Pods-BattleShip-umbrella.h"
+
+  export *
+  module * { export * }
+}
