@@ -17,6 +17,7 @@
 		674899B01F7C245E0081C2C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 674899AE1F7C245E0081C2C4 /* LaunchScreen.storyboard */; };
 		674899BB1F7C245E0081C2C4 /* BattleShipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674899BA1F7C245E0081C2C4 /* BattleShipTests.swift */; };
 		674899C61F7C245E0081C2C4 /* BattleShipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674899C51F7C245E0081C2C4 /* BattleShipUITests.swift */; };
+		67D6357C1F7E0B1500BD1970 /* GameofThrones.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67D6357B1F7E0B1500BD1970 /* GameofThrones.mp3 */; };
 		718CB71E1F7C65D1003A77A3 /* MPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718CB71D1F7C65D1003A77A3 /* MPCHandler.swift */; };
 		71D46EE91F7D7510006219D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71D46EE81F7D7510006219D8 /* GoogleService-Info.plist */; };
 		7A7C7A9A5E7E4FE97030DCC8 /* Pods_BattleShipTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB53D205B8BBF8E40400EF5F /* Pods_BattleShipTests.framework */; };
@@ -57,6 +58,7 @@
 		674899C11F7C245E0081C2C4 /* BattleShipUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleShipUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		674899C51F7C245E0081C2C4 /* BattleShipUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleShipUITests.swift; sourceTree = "<group>"; };
 		674899C71F7C245E0081C2C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67D6357B1F7E0B1500BD1970 /* GameofThrones.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GameofThrones.mp3; path = ../../../../Downloads/GameofThrones.mp3; sourceTree = "<group>"; };
 		718CB71D1F7C65D1003A77A3 /* MPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHandler.swift; sourceTree = "<group>"; };
 		71D46EE81F7D7510006219D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		85E0B57FD7BC6E1D0948DAB7 /* Pods-BattleShipUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattleShipUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BattleShipUITests/Pods-BattleShipUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				674899A91F7C245E0081C2C4 /* BattleShip.xcdatamodeld */,
 				718CB71D1F7C65D1003A77A3 /* MPCHandler.swift */,
 				71D46EE81F7D7510006219D8 /* GoogleService-Info.plist */,
+				67D6357B1F7E0B1500BD1970 /* GameofThrones.mp3 */,
 			);
 			path = BattleShip;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				71D46EE91F7D7510006219D8 /* GoogleService-Info.plist in Resources */,
 				674899AD1F7C245E0081C2C4 /* Assets.xcassets in Resources */,
 				674899A81F7C245E0081C2C4 /* Main.storyboard in Resources */,
+				67D6357C1F7E0B1500BD1970 /* GameofThrones.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

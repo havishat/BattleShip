@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B1347779D371ACF40AB2228792EFF5D7131E5FD9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6D9DC19AA2D4B07E76CB55353837C22265D08D1C" : 9223372036854775807,
+    "B1347779D371ACF40AB2228792EFF5D7131E5FD9" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5AD8D4FA-A985-43C7-B834-56FDA2217764",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6D9DC19AA2D4B07E76CB55353837C22265D08D1C" : "",
+    "B1347779D371ACF40AB2228792EFF5D7131E5FD9" : "BattleShip\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BattleShip",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BattleShip.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/thej123\/CodingDojo-IOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6D9DC19AA2D4B07E76CB55353837C22265D08D1C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/thej123\/BattleShip.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1347779D371ACF40AB2228792EFF5D7131E5FD9"
+    }
+  ]
+}

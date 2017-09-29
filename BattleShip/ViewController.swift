@@ -8,18 +8,26 @@
 
 import UIKit
 import FirebaseDatabase
+import AVFoundation
 
 class ViewController: UIViewController {
     
     var imageCount = 1
     var ref:DatabaseReference?
     var faces = [Int]()
-    var enemyfaces = [Int]()
-    var playernum = ["ImIn"]
+    var face1 = [Int]()
+    var face2 = [Int]()
+    var playernum = [String]()
+    var playernumber = Int()
     var handle:DatabaseHandle?
     
+    var tag = [Int]()
+    var winnertag = String()
+    
+    var audioPlayer = AVAudioPlayer()
     
     
+    @IBOutlet weak var ScoreOutlet: UILabel!
     @IBOutlet weak var UserinfoOutlet: UILabel!
     
     @IBOutlet weak var Button1Outlet: UIButton!
@@ -38,33 +46,75 @@ class ViewController: UIViewController {
     @IBOutlet weak var Button14Outlet: UIButton!
     @IBOutlet weak var Button15Outlet: UIButton!
     
+    lazy var buttons: [UIButton] = [self.Button1Outlet, self.Button2Outlet, self.Button3Outlet, self.Button4Outlet, self.Button5Outlet, self.Button6Outlet, self.Button7Outlet, self.Button8Outlet, self.Button9Outlet, self.Button10Outlet, self.Button11Outlet, self.Button12Outlet, self.Button13Outlet, self.Button14Outlet, self.Button15Outlet]
+    
     @IBOutlet weak var ReadyButtonOutlet: UIButton!
     @IBAction func ReadyButton(_ sender: UIButton) {
-        ref?.child("list").childByAutoId().setValue(faces)
         
-        handle = ref?.child("player").observe(.childAdded, with: { (snapshot) in
-            if let item2 = snapshot.value as? String {
-                print(item2)
-                self.playernum.append(item2)
-                print(self.playernum)
+        if (ReadyButtonOutlet.titleLabel?.text == "Ready") {
+        
+            handle = ref?.child("player").observe(.childAdded, with: { (snapshot) in
+                if let item2 = snapshot.value as? String {
+                    print("item----->", item2)
+                    self.playernum.append(item2)
+                }
+            })
+        
+            if (playernum.count == 0) {
+                self.ref?.child("player").childByAutoId().setValue("ImIn")
             }
-            self.ref?.child("player").childByAutoId().setValue("ImIn")
-            
-        })
-        print(playernum)
         
-
+            sender.setTitle("Start", for: .normal)
+        
+        } else {
+            print(playernum)
+            player()
+            if (playernumber == 1) {
+                ref?.child("list1").childByAutoId().setValue(faces)
+                for button in self.buttons {
+                    button.isEnabled = true
+                }
+            } else {
+                ref?.child("list1").childByAutoId().setValue(faces)
+                for button in self.buttons {
+                    button.isEnabled = false
+                }
+            }
+            print("playernumber from startbutton", playernumber)
+            sender.isHidden = true
+            UserinfoOutlet.text = "Lets Go!"
+            
+        }
         
     
     }
     
     func player() {
-    
+        playernumber = playernum.count
     }
     
-
+    
+    func myDeleteFunction(childIWantToRemove: String) {
+        
+        ref?.child(childIWantToRemove).removeValue { (error, ref) in
+            if error != nil {
+                print("error \(error)")
+            }
+        }
+    }
+    
     @IBOutlet weak var PlayAgainPressedOutlet: UIButton!
     @IBAction func PlayAgainPressed(_ sender: UIButton) {
+        imageCount = 1
+        for button in self.buttons {
+            button.isEnabled = true
+            button.setImage(nil, for: .normal)
+        }
+        score = 5
+        UserinfoOutlet.text = "Choose you Defenders"
+        ScoreOutlet.text = String(score)
+        ReadyButtonOutlet.setTitle("Ready", for: .normal)
+        viewDidLoad()
     }
 
     
@@ -98,34 +148,144 @@ class ViewController: UIViewController {
         else if imageCount == 5 {
             sender.setImage(UIImage(named: "gtimage5"), for: UIControlState.normal)
             faces.append(sender.tag)
-            sender.isEnabled = false
             imageCount += 1
             ReadyButtonOutlet.isHidden = false
+            for button in self.buttons {
+                button.isEnabled = false
+            }
+            
+        } else {
+            if (score > 0) {
+                print("faces--->", faces)
+                self.ref?.child("tag").childByAutoId().setValue([playernumber, sender.tag])
+                print("tag:", tag)
+                for button in self.buttons {
+                    button.isEnabled = false
+                }
+                UserinfoOutlet.text = "Opponent's Turn!"
+            }
+            else {
+                print("winner")
+                UserinfoOutlet.text = "Game Over - You Lost"
+                
+                for button in self.buttons {
+                    button.isEnabled = false
+                }
+                PlayAgainPressedOutlet.isHidden = false
+                winnertag = "Ilostalready"
+                self.ref?.child("Ilost").childByAutoId().setValue("Ilost")
+            }
         }
     }
+
     
+    var cellcount = 0
+    var score = 5
+    func celldestroyed() {
+        // divideface()
+        // tag = [1,15]
+        if cellcount > 0 {
+            print("playernumber-->", playernumber)
+            print("scoreval:", score)
+            if (playernumber == 1) {
+                print("hellow1")
+                print("dfgdgd",faces)
+                for i in 0...4 {
+                    print(faces[i])
+                    if (faces[i] == tag[1]) {
+                        print("lower score")
+                        score -= 1
+                        ScoreOutlet.text = String(score)
+                    }
+                }
+            } else {
+                print("hellow1")
+                for i in 5...((faces.count)-1) {
+                    if faces[i] == tag[1] {
+                        score -= 1
+                        ScoreOutlet.text = String(score)
+                    }
+                }
+            }
+        }
+        cellcount = 1
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        playSound(file: "GameofThrones")
+
 //        UIButton.appearance().borderColor = UIColor.gray;
         UIButton.appearance().borderWidth = 2;
-        UIButton.appearance().backgroundColor = UIColor.yellow
+       // UIButton.appearance().backgroundColor = UIColor.yellow
         //        UIButton.appearance().cornerRadius = 20;
+        
+        myDeleteFunction(childIWantToRemove: "tag")
+        myDeleteFunction(childIWantToRemove: "list1")
+        myDeleteFunction(childIWantToRemove: "player")
+        myDeleteFunction(childIWantToRemove: "Ilost")
         
         ReadyButtonOutlet.isHidden = true
         PlayAgainPressedOutlet.isHidden = true
         
         ref = Database.database().reference()
 
-//        handle = ref?.child("list").observe(.childAdded, with: { (snapshot) in
-//            if let item = snapshot.value as? [Int] {
-//                self.enemyfaces = item
-//                
-//            }
-//        })
+//        if (playernumber == 1) {
+//            print("playernumber from above-->", playernumber)
+//            handle = ref?.child("list2").observe(.childAdded, with: { (snapshot) in
+//                if let item = snapshot.value as? [Int] {
+//                    self.faces = item
+//                }
+//            })
+//        } else {
+//            print("playernumber -->", playernumber)
+            handle = ref?.child("list1").observe(.childAdded, with: { (snapshot) in
+                if let item2 = snapshot.value as? [Int] {
+                    self.faces = item2
+                }
+            })
+//        }
         
+        handle = ref?.child("tag").observe(.childAdded, with: { (snapshot) in
+            if let item3 = snapshot.value as? [Int] {
+                self.tag = item3
+//                if (self.score == 0) {
+//                    print("winner")
+//                    self.UserinfoOutlet.text = "You Won"
+//                    
+//                }
+                 if (self.playernumber == 1) {
+                    if (self.tag[0] == 2) {
+                        self.celldestroyed()
+                        for button in self.buttons {
+                            button.isEnabled = true
+                        }
+                        self.UserinfoOutlet.text = "Your Turn!"
+                    }
+                } else {
+                    if (self.tag[0] == 1) {
+                        self.celldestroyed()
+                        for button in self.buttons {
+                            button.isEnabled = true
+                        }
+                        self.UserinfoOutlet.text = "Your Turn!"
+
+                    }
+                }
+            }
+        })
         
-        // Do any additional setup after loading the view, typically from a nib.
+        handle = ref?.child("Ilost").observe(.childAdded, with: { (snapshot) in
+            if let item4 = snapshot.value as? String {
+                if self.winnertag != "Ilostalready" {
+                    self.UserinfoOutlet.text = "Game Over - You Won"
+                    self.PlayAgainPressedOutlet.isHidden = false
+                }
+            }
+        })
 
     }
 
@@ -133,6 +293,30 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func playSound(file: String){
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: file, ofType: "mp3")!))
+            print("hello")
+            //audioPlayer = audioPlayers[send,
+            //audioPlayers[file].play()
+            audioPlayer.play()
+            let audioSession = AVAudioSession.sharedInstance()
+            
+            do{
+                try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            }
+            catch{
+                //
+            }
+        }
+        catch {
+            print(error)
+        }
+        
+    }
+
 
 
 }
