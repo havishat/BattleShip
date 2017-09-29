@@ -114,6 +114,7 @@ class ViewController: UIViewController {
         UserinfoOutlet.text = "Choose you Defenders"
         ScoreOutlet.text = String(score)
         ReadyButtonOutlet.setTitle("Ready", for: .normal)
+        faces = [Int]()
         viewDidLoad()
     }
 
